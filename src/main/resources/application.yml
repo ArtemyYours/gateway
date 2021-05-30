@@ -1,0 +1,21 @@
+server:
+  port: 8081
+
+application:
+  crud-server-url: http://localhost:8082/
+  log-body-limit: 128
+
+keycloak:
+  auth-server-url: http://84.252.136.217:8080/auth
+  realm: balance-tracker
+  resource: balance-tracker-common
+  public-client: true
+  ssl-required: external
+  use-resource-role-mappings: true
+  bearer-only: true
+  credentials:
+    secret: 8ccc9d29-726a-40fc-baa9-6b87f9bbfbaf
+
+spring:
+  main:
+    allow-bean-definition-overriding: true

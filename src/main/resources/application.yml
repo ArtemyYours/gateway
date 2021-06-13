@@ -2,11 +2,14 @@ server:
   port: 8081
 
 application:
-  crud-server-url: http://localhost:8082/
+  crud-server-url: http://84.252.140.80:8082/
+  keycloak-url-xforward: 84.252.140.80:8080
   log-body-limit: 128
+  keycloak-register-client-id: admin-cli
+  keycloak-register-client-secret: 5ee6596a-27c8-4452-ab22-d32162442733
 
 keycloak:
-  auth-server-url: http://84.252.136.217:8080/auth
+  auth-server-url: http://84.252.140.80:8080/auth/
   realm: balance-tracker
   resource: balance-tracker-common
   public-client: true

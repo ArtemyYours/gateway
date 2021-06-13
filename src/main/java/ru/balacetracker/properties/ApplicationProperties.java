@@ -15,4 +15,7 @@ import java.util.Base64;
 public class ApplicationProperties {
     private String crudServerUrl;
     private Integer logBodyLimit;
+    private String keycloakUrlXforward;
+    private String keycloakRegisterClientId;
+    private String keycloakRegisterClientSecret;
 }

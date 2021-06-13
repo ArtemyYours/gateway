@@ -1,0 +1,8 @@
+application:
+  crud-server-url: http://localhost:8082/
+  keycloak-url-xforward: localhost:8080
+
+keycloak:
+  auth-server-url: http://localhost:8080/auth
+  credentials:
+    secret: 51b34b04-2d9d-47f2-a962-7761165e03a4

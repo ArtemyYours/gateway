@@ -13,6 +13,9 @@ repositories {
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+
     implementation 'org.projectlombok:lombok:1.18.18'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'

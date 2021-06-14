@@ -37,7 +37,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ${{ env.DOCKER_IMAGE_NAME }}:master
+        tags: ${{ env.DOCKER_IMAGE_NAME }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,5 +53,5 @@ jobs:
           script: |
             docker rm $(docker stop $(docker ps -a -q --filter ancestor=${{ env.DOCKER_IMAGE_NAME }} --format="{{.ID}}"))
             docker image rm ${{ env.DOCKER_IMAGE_NAME }}:master
-            docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }}:master
+            docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }}
 

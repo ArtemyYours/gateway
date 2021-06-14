@@ -80,6 +80,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: 22
-          script: |
-            docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }}
+          script:
+            docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }} &
+            bg &
             exit

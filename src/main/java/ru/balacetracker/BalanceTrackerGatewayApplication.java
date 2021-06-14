@@ -12,6 +12,7 @@ import ru.balacetracker.properties.KeycloakProperties;
 public class BalanceTrackerGatewayApplication {
 
     public static void main(String[] args) {
+        System.out.println("hello-world");
         SpringApplication.run(BalanceTrackerGatewayApplication.class, args);
     }
 

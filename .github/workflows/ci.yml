@@ -82,5 +82,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: 22
           script: |
-            nohup docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }}
             exit
+            docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }}

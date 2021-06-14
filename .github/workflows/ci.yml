@@ -14,6 +14,9 @@ jobs:
     steps:
     - name: Checkout main branch
       uses: actions/checkout@v2
+      
+    - name: Gradle Build
+      run: gradle build
     
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v1

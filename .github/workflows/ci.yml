@@ -65,6 +65,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: 22
+          script_stop: true
           script:
             docker image rm ${{ env.DOCKER_IMAGE_NAME }} &
             exit
@@ -80,7 +81,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: 22
-          script:
-            nohup docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }} &
-            disown &
+          script: |
+            nohup docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }}
             exit

@@ -15,6 +15,9 @@ jobs:
     - name: Checkout main branch
       uses: actions/checkout@v2
       
+    - name: Go in root dir
+      run: cd balance_tracker_gateway 
+      
     - name: Gradle Build
       run: gradle build
     

@@ -76,12 +76,12 @@ jobs:
     needs: [ build, remove-image]
     steps:
       - name: Pulling and starting new image...
-        uses: cross-the-world/ssh-pipeline@master
+        uses: JimCronqvist/action-ssh@master
         with:
-          key: ${{ secrets.SERVER_SECRET }}
-          host: ${{ secrets.HOST }}
+          privateKey: ${{ secrets.SERVER_SECRET }}
+          hosts: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: 22
           connect_timeout: 20s
-          script: 
+          command: 
             docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }}

@@ -84,4 +84,4 @@ jobs:
           port: 22
           connect_timeout: 20s
           script: 
-            nohup docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }} && exit
+            docker run -p ${{ env.PORT_TO_MAP }} ${{ env.DOCKER_IMAGE_NAME }}

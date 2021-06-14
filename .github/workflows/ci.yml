@@ -72,10 +72,12 @@ jobs:
 
   deploy-and-run:
     runs-on: ubuntu-latest
+    timeout-minutes: 2
     needs: [ build, remove-image]
     steps:
       - name: Pulling and starting new image...
         uses: appleboy/ssh-action@master
+        
         with:
           key: ${{ secrets.SERVER_SECRET }}
           host: ${{ secrets.HOST }}

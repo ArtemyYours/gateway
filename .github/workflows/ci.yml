@@ -79,7 +79,7 @@ jobs:
         uses: JimCronqvist/action-ssh@master
         with:
           privateKey: ${{ secrets.SERVER_SECRET }}
-          hosts: ${{ secrets.HOST }}
+          hosts: ubuntu@${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           port: 22
           connect_timeout: 20s

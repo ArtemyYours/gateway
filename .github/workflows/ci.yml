@@ -36,15 +36,15 @@ jobs:
         push: true
         tags: artemyyours/balance-tracker-gateway:master
 
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Connect via ssh
-          uses: appleboy/ssh-action@master
-          with:
-            key: ${{ secrets.SERVER_SECRET }}
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            port: 22
-            script: docker ps -a
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect via ssh
+        uses: appleboy/ssh-action@master
+        with:
+          key: ${{ secrets.SERVER_SECRET }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: 22
+          script: docker ps -a
 

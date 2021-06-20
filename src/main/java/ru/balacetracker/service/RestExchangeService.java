@@ -11,6 +11,7 @@ import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 import ru.balacetracker.components.RestTemplateLoggingInterceptor;
 import ru.balacetracker.exceptions.RestTemplateResponseErrorHandler;
@@ -26,7 +27,6 @@ import java.util.Map;
 @Slf4j
 public class RestExchangeService {
     private static final String PATH_TO_OBTAIN_ADMIN_TOKEN = "/realms/balance-tracker/protocol/openid-connect/token";
-    private static final String PATH_TO_REGISTER_USER = "/admin/realms/balance-tracker/users";
 
     private final ApplicationProperties applicationProperties;
     private final KeycloakProperties keycloakProperties;
@@ -60,23 +60,7 @@ public class RestExchangeService {
         return restTemplate.exchange(fullPath, method, new HttpEntity<>(body, headers), responseClass).getBody();
     }
 
-    public void registerUser(String username, String email, String firstName, String lastName, String password) {
-
-        String clientToken = getToken();
-        HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + clientToken);
-
-        String body = KeycloakRequestUtils.getRegisterRequestBody(username, email, firstName, lastName, password);
-        exchangeWithKeycloak(body,
-                HttpMethod.POST,
-                PATH_TO_REGISTER_USER,
-                headers,
-                null,
-                MediaType.APPLICATION_JSON);
-
-    }
-
-    private String getToken() {
+    public String getToken() {
         HttpHeaders headers = new HttpHeaders();
         MultiValueMap<String, String> mapToGetServiceToken =
                 KeycloakRequestUtils.getMultivalueMapToGetServiceToken(applicationProperties);

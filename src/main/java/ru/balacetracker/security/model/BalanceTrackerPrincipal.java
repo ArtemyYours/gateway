@@ -16,7 +16,6 @@ public class BalanceTrackerPrincipal extends KeycloakPrincipal<KeycloakSecurityC
     private String email;
     private String firstName;
     private String lastName;
-    private boolean emailVerified;
 
     public BalanceTrackerPrincipal(KeycloakPrincipal<KeycloakSecurityContext> principal) {
         super(principal.getName(), principal.getKeycloakSecurityContext());

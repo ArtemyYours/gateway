@@ -3,6 +3,7 @@ package ru.balacetracker.security.utils;
 import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.adapters.springsecurity.KeycloakAuthenticationException;
+import org.keycloak.adapters.springsecurity.account.SimpleKeycloakAccount;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.balacetracker.security.model.BalanceTrackerPrincipal;
 
@@ -15,8 +16,14 @@ public class SecurityUtils {
         throw new KeycloakAuthenticationException("Security context has no keycloak principal. User is not identified");
     }
 
-    public static String getToken(){
-        KeycloakPrincipal<KeycloakSecurityContext> principal =  (KeycloakPrincipal<KeycloakSecurityContext>) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal.getKeycloakSecurityContext().getTokenString();
+    public static String getToken() {
+        SimpleKeycloakAccount currentUserAccount = (SimpleKeycloakAccount) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        return currentUserAccount.getKeycloakSecurityContext().getTokenString();
+    }
+
+    public static String getRefreshToken() {
+        SimpleKeycloakAccount currentUserAccount = (SimpleKeycloakAccount) SecurityContextHolder.getContext().getAuthentication().getDetails();
+        String s = currentUserAccount.getKeycloakSecurityContext().getRefreshToken();
+        return null;
     }
 }

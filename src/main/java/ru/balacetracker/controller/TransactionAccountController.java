@@ -63,7 +63,7 @@ public class TransactionAccountController {
     }
 
     @SecurityConstants.PreAuthorizeUserRole
-    @PostMapping("/purses/all")
+    @GetMapping("/purses/all")
     public Object getPursesForUser() {
         Object result = restExchangeService.exchangeWithCrud(
                 null,
@@ -75,7 +75,7 @@ public class TransactionAccountController {
     }
 
     @SecurityConstants.PreAuthorizeUserRole
-    @PostMapping("/outcome/all")
+    @GetMapping("/outcome/all")
     public Object getOutcomeForUser() {
         Object result = restExchangeService.exchangeWithCrud(
                 null,
@@ -87,7 +87,7 @@ public class TransactionAccountController {
     }
 
     @SecurityConstants.PreAuthorizeUserRole
-    @PostMapping("/income/all")
+    @GetMapping("/income/all")
     public Object getIncomeForUser() {
         Object result = restExchangeService.exchangeWithCrud(
                 null,
@@ -99,7 +99,7 @@ public class TransactionAccountController {
     }
 
     @SecurityConstants.PreAuthorizeUserRole
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         restExchangeService.exchangeWithCrud(
                 null,
@@ -111,7 +111,7 @@ public class TransactionAccountController {
     }
 
     @SecurityConstants.PreAuthorizeUserRole
-    @PostMapping("/update/{transactionAccountId}")
+    @PutMapping("/update/{transactionAccountId}")
     public void update(@PathVariable Long transactionAccountId,
                        @RequestBody @NotNull Object body) {
         restExchangeService.exchangeWithCrud(

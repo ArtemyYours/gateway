@@ -37,6 +37,8 @@ public class RestExchangeService {
     public <T> T exchangeWithCrud(Object body, HttpMethod method, String path, Class<T> responseClass) {
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + SecurityUtils.getToken());
+
+        SecurityUtils.getCurrentUser();
         if (body != null) {
             headers.setContentType(MediaType.APPLICATION_JSON);
         }

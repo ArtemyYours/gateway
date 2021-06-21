@@ -5,10 +5,6 @@ import org.keycloak.KeycloakPrincipal;
 import org.keycloak.KeycloakSecurityContext;
 import org.keycloak.representations.AccessToken;
 
-import java.util.List;
-
-import static ru.balacetracker.utils.Utils.nullableCollectionToHashSet;
-
 @Getter
 public class BalanceTrackerPrincipal extends KeycloakPrincipal<KeycloakSecurityContext>{
     private String id;
@@ -16,6 +12,8 @@ public class BalanceTrackerPrincipal extends KeycloakPrincipal<KeycloakSecurityC
     private String email;
     private String firstName;
     private String lastName;
+    private String token;
+    private String refreshToken;
 
     public BalanceTrackerPrincipal(KeycloakPrincipal<KeycloakSecurityContext> principal) {
         super(principal.getName(), principal.getKeycloakSecurityContext());

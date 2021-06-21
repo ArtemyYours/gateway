@@ -20,10 +20,4 @@ public class SecurityUtils {
         SimpleKeycloakAccount currentUserAccount = (SimpleKeycloakAccount) SecurityContextHolder.getContext().getAuthentication().getDetails();
         return currentUserAccount.getKeycloakSecurityContext().getTokenString();
     }
-
-    public static String getRefreshToken() {
-        SimpleKeycloakAccount currentUserAccount = (SimpleKeycloakAccount) SecurityContextHolder.getContext().getAuthentication().getDetails();
-        String s = currentUserAccount.getKeycloakSecurityContext().getRefreshToken();
-        return null;
-    }
 }

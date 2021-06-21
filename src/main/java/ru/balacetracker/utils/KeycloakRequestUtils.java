@@ -12,7 +12,7 @@ public class KeycloakRequestUtils {
     public static final String PASSWORD_KEY = "password";
     public static final String CLIENT_ID_KEY = "client_id";
     public static final String CLIENT_SECRET_KEY = "client_secret";
-    public static final String REFRESH_TOKEN = "refresh_token";
+    public static final String REFRESH_TOKEN_KEY = "refresh_token";
 
     public static final String GRANT_TYPE_CLIENT_CREDENTIALS = "client_credentials";
     public static final String GRANT_TYPE_PASSWORD = "password";

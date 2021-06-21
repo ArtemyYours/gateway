@@ -34,13 +34,13 @@ public class TransactionController {
     }
 
     @SecurityConstants.PreAuthorizeUserRole
-    @GetMapping("/transactions-for-user/{itemsPerPage}/{pageNumber}")
+    @PutMapping ("/transactions-for-user/{itemsPerPage}/{pageNumber}")
     public Object getTransactionsForUser(@PathVariable Integer itemsPerPage,
                                          @PathVariable Integer pageNumber,
                                          @RequestBody @NotNull Object body) {
         Object result = restExchangeService.exchangeWithCrud(
                 body,
-                HttpMethod.GET,
+                HttpMethod.PUT,
                 String.format(TRANSACTION_CONTROLLER_PATH + TRANSACTIONS_FOR_USER_PATH, itemsPerPage, pageNumber),
                 Object.class
         );

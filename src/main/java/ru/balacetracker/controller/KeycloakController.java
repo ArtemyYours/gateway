@@ -10,12 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.balacetracker.properties.KeycloakProperties;
-import ru.balacetracker.security.SecurityConstants;
 import ru.balacetracker.security.utils.SecurityUtils;
 import ru.balacetracker.service.RestExchangeService;
 import ru.balacetracker.utils.KeycloakRequestUtils;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/keycloak")
@@ -28,6 +25,7 @@ public class KeycloakController {
     private static final String PATH_TO_LOGOUT = "/realms/balance-tracker/protocol/openid-connect/logout";
     private static final String GET_TOKEN_PATH = "/realms/balance-tracker/protocol/openid-connect/token";
     private static final String PATH_TO_REGISTER_USER = "/admin/realms/balance-tracker/users";
+    private static final String REFRESH_TOKEN_PATH = "realms/balance-tracker/protocol/openid-connect/token";
 
     @PostMapping("/get-token")
     public Object getToken(
@@ -79,12 +77,31 @@ public class KeycloakController {
         MultiValueMap<String, String> body =
                 new LinkedMultiValueMap<>();
         body.add(KeycloakRequestUtils.CLIENT_ID_KEY, properties.getResource());
-        body.add(KeycloakRequestUtils.REFRESH_TOKEN, SecurityUtils.getRefreshToken());
         body.add(KeycloakRequestUtils.CLIENT_SECRET_KEY, properties.getCredentials().getSecret());
 
                 restExchangeService.exchangeWithKeycloak(body,
                 HttpMethod.POST,
                 PATH_TO_LOGOUT,
+                headers,
+                null,
+                MediaType.APPLICATION_FORM_URLENCODED);
+    }
+
+    @PostMapping("/refresh-token")
+    public void refreshToken(@RequestParam @NonNull String refreshToken){
+        HttpHeaders headers = new HttpHeaders();
+        headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + SecurityUtils.getToken());
+
+        MultiValueMap<String, String> body =
+                new LinkedMultiValueMap<>();
+        body.add(KeycloakRequestUtils.CLIENT_ID_KEY, properties.getResource());
+        body.add(KeycloakRequestUtils.REFRESH_TOKEN_KEY, refreshToken);
+        body.add(KeycloakRequestUtils.GRANT_TYPE_KEY, KeycloakRequestUtils.REFRESH_TOKEN_KEY);
+        body.add(KeycloakRequestUtils.CLIENT_SECRET_KEY, properties.getCredentials().getSecret());
+
+        restExchangeService.exchangeWithKeycloak(body,
+                HttpMethod.POST,
+                REFRESH_TOKEN_PATH,
                 headers,
                 null,
                 MediaType.APPLICATION_FORM_URLENCODED);

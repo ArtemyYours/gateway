@@ -20,5 +20,13 @@ keycloak:
     secret: 8ccc9d29-726a-40fc-baa9-6b87f9bbfbaf
 
 spring:
+  datasource:
+    url: jdbc:postgresql://130.193.43.233:5000/postgres
+    username: user
+    password: 123123
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
   main:
     allow-bean-definition-overriding: true

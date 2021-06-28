@@ -6,3 +6,9 @@ keycloak:
   auth-server-url: http://localhost:8080/auth
   credentials:
     secret: 51b34b04-2d9d-47f2-a962-7761165e03a4
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5000/postgres
+    username: user
+    password: 123123

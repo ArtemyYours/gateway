@@ -6,6 +6,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
 import ru.balacetracker.security.SecurityConstants;
 import ru.balacetracker.service.RestExchangeService;
+import ru.balacetracker.validation.ValidAccess;
+
+import javax.validation.constraints.Positive;
 
 @RestController
 @RequestMapping("/transaction")
@@ -50,7 +53,7 @@ public class TransactionController {
     @SecurityConstants.PreAuthorizeUserRole
     @DeleteMapping("/delete/{transactionId}")
     public void deleteTransaction(
-            @PathVariable Long transactionId) {
+            @PathVariable @NotNull @Positive @ValidAccess(type = ValidAccess.Type.TRANSACTION_ID) Long transactionId) {
         restExchangeService.exchangeWithCrud(
                 null,
                 HttpMethod.DELETE,
@@ -60,7 +63,7 @@ public class TransactionController {
     }
 
     @PutMapping("/update/{transactionId}")
-    public void update(@PathVariable Long transactionId,
+    public void update(@PathVariable @NotNull @Positive @ValidAccess(type = ValidAccess.Type.TRANSACTION_ID) Long transactionId,
                        @RequestBody @NotNull Object body) {
         restExchangeService.exchangeWithCrud(
                 body,

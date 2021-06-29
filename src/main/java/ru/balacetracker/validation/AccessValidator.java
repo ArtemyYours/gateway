@@ -1,6 +1,7 @@
 package ru.balacetracker.validation;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import ru.balacetracker.exceptions.HttpException;
@@ -11,7 +12,7 @@ import ru.balacetracker.security.utils.SecurityUtils;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.util.Map;
+
 
 @Component
 @RequiredArgsConstructor
@@ -23,13 +24,23 @@ public class AccessValidator implements ConstraintValidator<ValidAccess, Object>
     private ValidAccess.Type type;
 
     @Override
-    public boolean isValid(Object value, ConstraintValidatorContext context) {
-        return false;
+    public void initialize(ValidAccess constraintAnnotation) {
+        this.type = constraintAnnotation.type();
     }
 
     @Override
-    public void initialize(ValidAccess constraintAnnotation) {
-        this.type = constraintAnnotation.type();
+    public boolean isValid(Object value, ConstraintValidatorContext context) {
+        try {
+            checkValidity(value, type);
+        } catch (HttpException httpException) {
+            context.disableDefaultConstraintViolation();
+            context.unwrap(HibernateConstraintValidatorContext.class)
+                    .withDynamicPayload(httpException)
+                    .buildConstraintViolationWithTemplate(httpException.getMessage())
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
     }
 
     public void checkValidity(Object object, ValidAccess.Type type) {
@@ -56,8 +67,7 @@ public class AccessValidator implements ConstraintValidator<ValidAccess, Object>
         }
     }
 
-
-    private boolean isValidTransactionId(Long transactionId) {
+    public boolean isValidTransactionId(Long transactionId) {
         if (!transactionRepository.existsById(transactionId)) {
             throw new HttpException(HttpStatus.NOT_FOUND,
                     MessageCode.ENTITY_NOT_FOUND,
@@ -68,7 +78,7 @@ public class AccessValidator implements ConstraintValidator<ValidAccess, Object>
         return transactionRepository.isAccessible(userId, transactionId);
     }
 
-    private boolean isValidTransactionAccountId(Long transactionAccountId){
+    public boolean isValidTransactionAccountId(Long transactionAccountId){
         if (!transactionAccountRepository.existsById(transactionAccountId)) {
             throw new HttpException(HttpStatus.NOT_FOUND,
                     MessageCode.ENTITY_NOT_FOUND,

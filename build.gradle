@@ -28,6 +28,11 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.3.9.RELEASE', ext: 'pom'
     implementation group: 'org.springframework.security', name: 'spring-security-data', version: '5.2.4.RELEASE'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.3.9.RELEASE'
+
+    implementation group: 'org.hibernate', name: 'hibernate-validator', version: '7.0.1.Final'
+
+    runtimeOnly 'org.postgresql:postgresql'
 
     implementation 'com.google.guava:guava:24.0-jre'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.12.0'
@@ -41,8 +46,6 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-
-
 }
 
 test {

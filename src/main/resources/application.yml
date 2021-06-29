@@ -9,7 +9,7 @@ application:
   keycloak-register-client-secret: 5ee6596a-27c8-4452-ab22-d32162442733
 
 keycloak:
-  auth-server-url: http://:8080/auth/
+  auth-server-url: http://84.252.137.38:8080/auth/
   realm: balance-tracker
   resource: balance-tracker-common
   public-client: true

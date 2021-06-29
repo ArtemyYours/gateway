@@ -13,6 +13,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
             "t.id = :transactionId " +
             "AND t.userId = :userId " +
             "AND t.isDeleted = false " +
-            "AND t.isDisplayes = true")
+            "AND t.isDisplayed = true")
     boolean isAccessible(String userId, Long transactionId);
 }

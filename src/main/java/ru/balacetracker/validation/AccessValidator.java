@@ -53,7 +53,7 @@ public class AccessValidator implements ConstraintValidator<ValidAccess, Object>
                 throw new HttpException(HttpStatus.FORBIDDEN,
                         MessageCode.ACCESS_DENIED,
                         null,
-                        String.format("Transaction %s does not accessible for current user", object));
+                        String.format("Transaction %s is not accessible for current user with id ", object));
             }
         }
 
@@ -62,7 +62,7 @@ public class AccessValidator implements ConstraintValidator<ValidAccess, Object>
                 throw new HttpException(HttpStatus.FORBIDDEN,
                         MessageCode.ACCESS_DENIED,
                         null,
-                        String.format("Transaction account %s does not accessible for current user", object));
+                        String.format("Transaction account %s is not accessible for current user with id ", object));
             }
         }
     }

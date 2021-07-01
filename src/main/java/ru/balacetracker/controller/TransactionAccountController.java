@@ -3,6 +3,7 @@ package ru.balacetracker.controller;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpMethod;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.balacetracker.security.SecurityConstants;
 import ru.balacetracker.service.RestExchangeService;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Positive;
 @RestController
 @RequestMapping("/transaction-account")
 @RequiredArgsConstructor
+@Validated
 public class TransactionAccountController {
     private static final String TRANSACTION_ACCOUNT_CONTROLLER_PATH = "/transaction-account";
     private static final String CREATE_PURSE_PATH = "/create-purse";

@@ -23,7 +23,7 @@ spring:
   datasource:
     url: jdbc:postgresql://130.193.53.105:5000/postgres
     username: balance_tracker_gateway
-    password: 7mE^=Yc3_B{s+=BE'
+    password: 7mE^=Yc3_B{s+=BE
   jpa:
     hibernate:
       ddl-auto: validate

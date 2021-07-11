@@ -8,11 +8,21 @@ version '0.01'
 
 repositories {
     mavenCentral()
+    maven {
+        name = "GitHubPackages"
+        url = uri("https://maven.pkg.github.com/balance-tracker/spring-boot-security-balance-tracker")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+            password = project.findProperty("gpr.token") ?: System.getenv("TOKEN")
+        }
+    }
 }
 
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
+    implementation ('ru.balancetracker:spring-boot-security-balance-tracker:1.0')
+
     implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 
